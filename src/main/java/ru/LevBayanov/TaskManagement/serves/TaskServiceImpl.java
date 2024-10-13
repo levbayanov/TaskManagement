@@ -1,7 +1,7 @@
-package serves;
+package ru.LevBayanov.TaskManagement.serves;
 
-import dao.TaskRepository;
-import entity.Task;
+import ru.LevBayanov.TaskManagement.dao.TaskRepository;
+import ru.LevBayanov.TaskManagement.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

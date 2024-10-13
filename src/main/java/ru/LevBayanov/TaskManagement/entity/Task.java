@@ -1,4 +1,4 @@
-package entity;
+package ru.LevBayanov.TaskManagement.entity;
 
 public class Task {
     private Long id;

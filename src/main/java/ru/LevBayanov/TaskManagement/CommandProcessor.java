@@ -1,9 +1,8 @@
 package ru.LevBayanov.TaskManagement;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import serves.TaskService;
+import ru.LevBayanov.TaskManagement.serves.TaskService;
 
 @Component
 public class CommandProcessor {

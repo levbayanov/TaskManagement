@@ -1,4 +1,4 @@
-package dao;
+package ru.LevBayanov.TaskManagement.dao;
 
 public interface CrudRepository<T, ID>{
     void create(T entity);

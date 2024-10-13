@@ -1,6 +1,6 @@
-package config;
+package ru.LevBayanov.TaskManagement.config;
 
-import entity.Task;
+import ru.LevBayanov.TaskManagement.entity.Task;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
-package serves;
+package ru.LevBayanov.TaskManagement.serves;
 
-import entity.Task;
+import ru.LevBayanov.TaskManagement.entity.Task;
 
 public interface TaskService {
     void createTask(Long id, String nameTask);

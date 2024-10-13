@@ -1,6 +1,6 @@
-package dao;
+package ru.LevBayanov.TaskManagement.dao;
 
-import entity.Task;
+import ru.LevBayanov.TaskManagement.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package config;
+package ru.LevBayanov.TaskManagement.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
