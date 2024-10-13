@@ -24,16 +24,15 @@ public class ConfigConsole {
                 System.out.println("Введите команду. 'exit' для выхода.");
                 while (true)
                 {
-// Показать приглашение для ввода
+
                     System.out.print("> ");
                     String input = scanner.nextLine();
-// Выход из цикла, если введена команда "exit"
+
                     if ("exit".equalsIgnoreCase(input.trim()))
                     {
                         System.out.println("Выход из программы...");
                         break;
                     }
-// Обработка команды
                     commandProcessor.processCommand(input);
                 }
             }

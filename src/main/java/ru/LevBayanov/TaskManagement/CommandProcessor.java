@@ -24,6 +24,7 @@ public class CommandProcessor {
                 taskService.createTask(Long.valueOf(cmd[1]), cmd[2]);
                 System.out.println("Задача успешно добавлена");
             }
+
             default -> System.out.println("Введена неизвестная команда");
         }
     }
