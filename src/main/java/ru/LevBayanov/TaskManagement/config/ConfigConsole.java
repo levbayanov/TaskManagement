@@ -1,7 +1,6 @@
 package ru.LevBayanov.TaskManagement.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,8 @@ public class ConfigConsole {
         {
             try (Scanner scanner = new Scanner(System.in))
             {
-                System.out.println("Введите команду. 'exit' для выхода.");
+                System.out.println("Введите команду: 'exit' для выхода.");
+                System.out.println("Введите команду: 'help' чтобы просмотреть список команд");
                 while (true)
                 {
 
@@ -30,7 +30,7 @@ public class ConfigConsole {
 
                     if ("exit".equalsIgnoreCase(input.trim()))
                     {
-                        System.out.println("Выход из программы...");
+                        System.out.println("Выход из программы");
                         break;
                     }
                     commandProcessor.processCommand(input);

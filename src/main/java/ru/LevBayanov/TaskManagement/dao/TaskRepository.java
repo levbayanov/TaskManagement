@@ -19,23 +19,25 @@ public class TaskRepository implements CrudRepository<Task, Long>{
     @Override
     public void create(Task task)
     {
-// здесь логика добавления сущности в userContainer
+        taskContainer.add(task);
     }
     @Override
-    public Task read(Long id)
-    {
-        return new Task(id, "12");
-// здесь логика получения сущности по id из userContainer
+    public Task read(Long id) throws IllegalArgumentException {
+        return taskContainer.stream()
+                .filter(task -> task.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Задача с ID " + id + " не найдена"));
     }
     @Override
     public void update(Task task)
     {
-// здесь логика обновления сущности в userContainer
+
     }
     @Override
     public void delete(Long id)
     {
-// здесь логика удаления сущности из userContainer
+        taskContainer.remove(read(id));
+
     }
 
 }

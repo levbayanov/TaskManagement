@@ -2,13 +2,16 @@ package ru.LevBayanov.TaskManagement.serves;
 
 import ru.LevBayanov.TaskManagement.dao.TaskRepository;
 import ru.LevBayanov.TaskManagement.entity.Task;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class TaskServiceImpl implements TaskService{
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository)
@@ -37,4 +40,5 @@ public class TaskServiceImpl implements TaskService{
         Task task = new Task(id, newNameTask);
         taskRepository.update(task);
     }
+
 }
