@@ -31,7 +31,13 @@ public class TaskRepository implements CrudRepository<Task, Long>{
     @Override
     public void update(Task task)
     {
-
+        for(int i = 0; i < taskContainer.size(); i++)
+        {
+            if(taskContainer.get(i).getId().equals(task.getId()))
+            {
+                taskContainer.set(i, task);
+            }
+        }
     }
     @Override
     public void delete(Long id)
