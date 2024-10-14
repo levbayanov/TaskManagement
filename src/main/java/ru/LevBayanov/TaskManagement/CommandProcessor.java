@@ -21,7 +21,10 @@ public class CommandProcessor {
         switch (cmd[0])
         {
             case "help" -> {
-
+                System.out.println("create     Добавить новою задачу");
+                System.out.println("read       Найти задачу");
+                System.out.println("delete     Удалить задачу");
+                System.out.println("rename     Переименовать задачу");
             }
             case "create" ->
             {
@@ -44,6 +47,7 @@ public class CommandProcessor {
             {
                 try {
                     taskService.deleteById(Long.valueOf(cmd[1]));
+                    System.out.println("Задача успешно удалена");
                 }
                 catch (IllegalArgumentException e)
                 {
