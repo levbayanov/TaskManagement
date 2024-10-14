@@ -36,6 +36,7 @@ public class TaskRepository implements CrudRepository<Task, Long>{
             if(taskContainer.get(i).getId().equals(task.getId()))
             {
                 taskContainer.set(i, task);
+
             }
         }
     }
