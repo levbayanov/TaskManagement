@@ -57,6 +57,7 @@ public class CommandProcessor {
             case "rename" ->
             {
                 taskService.updateNameTask(Long.valueOf(cmd[1]), String.valueOf(cmd[2]));
+                System.out.println("Задача успешно переименована");
             }
             default -> System.out.println("Введена неизвестная команда");
         }

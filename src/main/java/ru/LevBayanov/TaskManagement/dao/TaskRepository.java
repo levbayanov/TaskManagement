@@ -22,7 +22,7 @@ public class TaskRepository implements CrudRepository<Task, Long>{
         taskContainer.add(task);
     }
     @Override
-    public Task read(Long id) throws IllegalArgumentException {
+    public Task read(Long id){
         return taskContainer.stream()
                 .filter(task -> task.getId().equals(id))
                 .findFirst()
@@ -31,20 +31,13 @@ public class TaskRepository implements CrudRepository<Task, Long>{
     @Override
     public void update(Task task)
     {
-        for(int i = 0; i < taskContainer.size(); i++)
-        {
-            if(taskContainer.get(i).getId().equals(task.getId()))
-            {
-                taskContainer.set(i, task);
-
-            }
-        }
+        delete(task.getId());
+        create(task);
     }
     @Override
     public void delete(Long id)
     {
         taskContainer.remove(read(id));
-
     }
 
 }

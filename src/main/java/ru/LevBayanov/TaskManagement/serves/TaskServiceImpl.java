@@ -21,8 +21,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void createTask(Long id, String nameTask) {
-        Task task = new Task(id, nameTask);
-        taskRepository.create(task);
+        taskRepository.create(new Task(id, nameTask));
     }
 
     @Override
@@ -37,8 +36,7 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void updateNameTask(Long id, String newNameTask) {
-        Task task = new Task(id, newNameTask);
-        taskRepository.update(task);
+        taskRepository.update(new Task(id, newNameTask));
     }
 
 }
