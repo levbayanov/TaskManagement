@@ -11,20 +11,13 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
-
     @Column
     private String name;
-
-    @Column
     private String description;
-
-    @Column
     private String status; // "Новая", "В процессе", "Завершена"
-
-    @Column
     private String priority;
-
     private ArrayList<User> ResponsibleUsers;
+    private int createDate;
     private int dueDate;
     private boolean expired;
 
@@ -96,5 +89,13 @@ public class Task {
 
     public void setExpired(boolean expired) {
         this.expired = expired;
+    }
+
+    public int getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(int createDate) {
+        this.createDate = createDate;
     }
 }
