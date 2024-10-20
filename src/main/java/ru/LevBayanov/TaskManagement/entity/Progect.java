@@ -1,5 +1,4 @@
 package ru.LevBayanov.TaskManagement.entity;
 
-public class User {
-
+public class Progect {
 }

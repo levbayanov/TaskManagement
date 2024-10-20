@@ -35,7 +35,7 @@ public class CommandProcessor {
             {
                 try {
                     Task task = taskService.fineById(Long.valueOf(cmd[1]));
-                    System.out.println(task.getNameTask());
+                    System.out.println(task.getName());
                 }
                 catch (IllegalArgumentException e)
                 {
