@@ -11,15 +11,17 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "project")
-public class Project {
+@Table(name = "task_state")
+public class TaskState {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
     private String name;
 
-    private Instant cratedAt = Instant.now();
+    private Long ordinal;
+
+    private Instant createdAt = Instant.now();
 
 }
