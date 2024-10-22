@@ -22,4 +22,7 @@ public class Project {
 
     private Instant cratedAt = Instant.now();
 
+    @OneToMany
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private List<TaskState> taskStates = new ArrayList<>();
 }

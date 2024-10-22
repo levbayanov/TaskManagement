@@ -24,4 +24,7 @@ public class TaskState {
 
     private Instant createdAt = Instant.now();
 
+    @OneToMany
+    @JoinColumn(name = "task_state_id", referencedColumnName = "id")
+    private List<Task> tasks = new ArrayList<>();
 }
