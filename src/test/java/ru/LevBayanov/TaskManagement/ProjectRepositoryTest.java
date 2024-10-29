@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.LevBayanov.TaskManagement.entity.ProjectEntity;
-import ru.LevBayanov.TaskManagement.entity.TaskStateEntity;
 import ru.LevBayanov.TaskManagement.repository.ProjectRepository;
 
 import java.util.UUID;
 
 @SpringBootTest
-public class ProjectTest {
+public class ProjectRepositoryTest {
     private final ProjectRepository projectRepository;
 
     @Autowired
-    ProjectTest(ProjectRepository projectRepository)
+    ProjectRepositoryTest(ProjectRepository projectRepository)
     {
         this.projectRepository = projectRepository;
     }

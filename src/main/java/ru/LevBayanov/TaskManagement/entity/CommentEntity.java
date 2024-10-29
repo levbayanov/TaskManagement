@@ -21,7 +21,7 @@ public class CommentEntity {
     private Instant createdAt = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "task_id", nullable = false)
     private TaskEntity task;
 
     @ManyToOne
