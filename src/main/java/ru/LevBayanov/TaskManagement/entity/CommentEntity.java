@@ -16,8 +16,6 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    //private UserEntity user;
-
     private String text;
 
     private Instant createdAt = Instant.now();

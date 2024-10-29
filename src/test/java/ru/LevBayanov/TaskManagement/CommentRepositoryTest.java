@@ -37,20 +37,17 @@ public class CommentRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        // Создание тестовой задачи и пользователя
+
         task = new TaskEntity();
         task.setName(UUID.randomUUID().toString());
         task.setDescription(UUID.randomUUID().toString());
         taskRepository.save(task);
 
-        // Предположим, что у вас есть метод для сохранения задачи
-
         user = new UserEntity();
-        user.setFullName(UUID.randomUUID().toString());
+        user.setName(UUID.randomUUID().toString());
+        user.setEmail(UUID.randomUUID().toString());
         userRepository.save(user);
-        // Тоже сохраните пользователя
 
-        // Создание нескольких комментариев
         comment1 = new CommentEntity();
         comment1.setText(UUID.randomUUID().toString());
         comment1.setTask(task);
@@ -61,7 +58,6 @@ public class CommentRepositoryTest {
         comment2.setTask(task);
         comment2.setUser(user);
 
-        // Сохранение объектов
         commentRepository.save(comment1);
         commentRepository.save(comment2);
     }
@@ -70,7 +66,7 @@ public class CommentRepositoryTest {
     void testFindByTask() {
         List<CommentEntity> foundComments = commentRepository.findByTask(task);
         assertThat(foundComments).isNotEmpty();
-        assertEquals(2, foundComments.size()); // Проверяем, что два комментария связаны с задачей
+        assertEquals(2, foundComments.size());
         assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment1.getText()));
         assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment2.getText()));
     }
@@ -79,7 +75,7 @@ public class CommentRepositoryTest {
     void testFindByTaskAndUser() {
         List<CommentEntity> foundComments = commentRepository.findByTaskAndUser(task, user);
         assertThat(foundComments).isNotEmpty();
-        assertEquals(2, foundComments.size()); // Проверяем количество комментариев
+        assertEquals(2, foundComments.size());
         assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment1.getText()));
         assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment2.getText()));
 

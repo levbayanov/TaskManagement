@@ -16,7 +16,10 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String fullName;
+    @Column(nullable = false)
+    private String name;
+
+    private String email;
 
     @ManyToMany
     @JoinTable(

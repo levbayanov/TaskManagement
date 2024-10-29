@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.dao;
+package ru.LevBayanov.TaskManagement.dao.custom;
 
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 

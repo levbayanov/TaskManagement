@@ -10,5 +10,4 @@ public interface ProjectRepository extends CrudRepository<ProjectEntity, Long> {
 
     List<ProjectEntity> findByName(String name);
 
-
 }
