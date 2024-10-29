@@ -25,7 +25,7 @@ public class TaskEntity {
     private Instant createdAt = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "task_state_id")
+    @JoinColumn(name = "task_state_id", nullable = false)
     private TaskStateEntity taskState;
 
     @OneToMany(mappedBy = "task")

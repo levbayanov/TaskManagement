@@ -16,14 +16,12 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    //private UserEntity user;
-
     private String text;
 
     private Instant createdAt = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "task_id", nullable = false)
     private TaskEntity task;
 
     @ManyToOne

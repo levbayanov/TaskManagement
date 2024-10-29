@@ -1,5 +1,6 @@
 package ru.LevBayanov.TaskManagement;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +12,23 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class CommentRepositoryTest {
+public class TaskRepositoryTest {
 
     private final CommentRepository commentRepository;
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
     private final TaskStateRepository taskStateRepository;
-    private TaskEntity task;
-    private UserEntity user;
+    private TaskEntity task1;
+    private UserEntity user1;
     private TaskStateEntity taskState;
     private ProjectEntity project;
     private CommentEntity comment1;
     private CommentEntity comment2;
     @Autowired
-    CommentRepositoryTest(CommentRepository commentRepository,
+    TaskRepositoryTest(CommentRepository commentRepository,
                           TaskRepository taskRepository,
                           UserRepository userRepository,
                           ProjectRepository projectRepository,
@@ -48,52 +48,63 @@ public class CommentRepositoryTest {
         project.setName(UUID.randomUUID().toString());
         projectRepository.save(project);
 
-        user = new UserEntity();
-        user.setName(UUID.randomUUID().toString());
-        user.setEmail(UUID.randomUUID().toString());
-        userRepository.save(user);
+        user1 = new UserEntity();
+        user1.setName(UUID.randomUUID().toString());
+        user1.setEmail(UUID.randomUUID().toString());
+        userRepository.save(user1);
 
         taskState = new TaskStateEntity();
         taskState.setName(UUID.randomUUID().toString());
         taskState.setProject(project);
         taskStateRepository.save(taskState);
 
-        task = new TaskEntity();
-        task.setName(UUID.randomUUID().toString());
-        task.setDescription(UUID.randomUUID().toString());
-        task.setTaskState(taskState);
-        taskRepository.save(task);
+        task1 = new TaskEntity();
+        task1.setName(UUID.randomUUID().toString());
+        task1.setDescription(UUID.randomUUID().toString());
+        task1.setTaskState(taskState);
+        taskRepository.save(task1);
 
         comment1 = new CommentEntity();
-        comment1.setUser(user);
-        comment1.setTask(task);
+        comment1.setUser(user1);
+        comment1.setTask(task1);
         comment1.setText(UUID.randomUUID().toString());
         commentRepository.save(comment1);
 
         comment2 = new CommentEntity();
-        comment2.setUser(user);
-        comment2.setTask(task);
+        comment2.setUser(user1);
+        comment2.setTask(task1);
         comment2.setText(UUID.randomUUID().toString());
         commentRepository.save(comment2);
     }
 
     @Test
-    void testFindByTask() {
-        List<CommentEntity> foundComments = commentRepository.findByTask(task);
-        assertThat(foundComments).isNotEmpty();
-        assertEquals(2, foundComments.size());
-        assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment1.getText()));
-        assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment2.getText()));
+    void testFindByName()
+    {
+        List<TaskEntity> foundTasks = taskRepository.findByName(task1.getName());
+
+        Assertions.assertFalse(foundTasks.isEmpty());
+        assertThat(foundTasks).anyMatch(task -> task.getName().equals(task1.getName()));
+        assertThat(foundTasks).anyMatch(task -> task.getId().equals(task1.getId()));
     }
 
     @Test
-    void testFindByTaskAndUser() {
-        List<CommentEntity> foundComments = commentRepository.findByTaskAndUser(task, user);
-        assertThat(foundComments).isNotEmpty();
-        assertEquals(2, foundComments.size());
-        assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment1.getText()));
-        assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment2.getText()));
+    void testFindByTaskState()
+    {
+        List<TaskEntity> foundTasks = taskRepository.findByTaskState(taskState);
 
+        Assertions.assertFalse(foundTasks.isEmpty());
+        assertThat(foundTasks).anyMatch(task -> task.getName().equals(task1.getName()));
+        assertThat(foundTasks).anyMatch(task -> task.getId().equals(task1.getId()));
+    }
+
+    @Test
+    void testFindByProject()
+    {
+        List<TaskEntity> foundTasks = taskRepository.findByProject(project);
+
+        Assertions.assertFalse(foundTasks.isEmpty());
+        assertThat(foundTasks).anyMatch(task -> task.getName().equals(task1.getName()));
+        assertThat(foundTasks).anyMatch(task -> task.getId().equals(task1.getId()));
     }
 
 }

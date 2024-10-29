@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.dao;
+package ru.LevBayanov.TaskManagement.dao.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -7,12 +7,13 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.LevBayanov.TaskManagement.dao.custom.ProjectRepositoryCustom;
 import ru.LevBayanov.TaskManagement.entity.ProjectEntity;
 
 import java.util.List;
 
 @Repository
-public class ProjectRepositoryImpl implements ProjectRepositoryCustom{
+public class ProjectRepositoryImpl implements ProjectRepositoryCustom {
 
     private final EntityManager entityManager;
 

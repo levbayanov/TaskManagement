@@ -13,5 +13,6 @@ import java.util.List;
 @RepositoryRestResource(path = "task_state")
 public interface TaskStateRepository extends CrudRepository<TaskStateEntity, Long> {
     List<TaskStateEntity> findByProject(ProjectEntity project);
+    List<TaskStateEntity> findByName(String name);
     List<TaskStateEntity> findByTask(TaskEntity task);
 }

@@ -12,9 +12,13 @@ import java.util.List;
 
 @RepositoryRestResource(path = "task")
 public interface TaskRepository extends CrudRepository<TaskEntity, Long> {
+    List<TaskEntity> findByName(String name);
+
     List<TaskEntity> findByTaskState(TaskStateEntity taskState);
 
     @Query("SELECT t FROM TaskEntity t WHERE t.taskState.project = :project")
     List<TaskEntity> findByProject(@Param("project") ProjectEntity project);
+
+
 
 }
