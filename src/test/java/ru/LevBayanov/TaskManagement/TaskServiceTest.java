@@ -3,6 +3,7 @@ package ru.LevBayanov.TaskManagement;
 
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,9 @@ public class TaskServiceTest {
     private final ProjectRepository projectRepository;
     private final TaskServiceImpl taskService;
 
+    private TaskEntity task1;
+    private TaskEntity task2;
+
     @Autowired
     public TaskServiceTest(TaskRepository taskRepository,
                            CommentRepository commentRepository,
@@ -37,20 +41,16 @@ public class TaskServiceTest {
         this.taskService = taskService;
     }
 
-    @Test
-    void testDeleteTaskByName()
+    @BeforeEach
+    void setUp()
     {
         ProjectEntity project = new ProjectEntity();
         project.setName(UUID.randomUUID().toString());
         projectRepository.save(project);
 
-        ProjectProfileEntity profile = new ProjectProfileEntity();
-        profile.setProject(project);
-
         UserEntity user = new UserEntity();
         user.setName(UUID.randomUUID().toString());
         user.setEmail(UUID.randomUUID().toString());
-        user.setProjectProfile(profile);
         userRepository.save(user);
 
         TaskStateEntity taskState = new TaskStateEntity();
@@ -58,13 +58,13 @@ public class TaskServiceTest {
         taskState.setProject(project);
         taskStateRepository.save(taskState);
 
-        TaskEntity task1 = new TaskEntity();
+        task1 = new TaskEntity();
         task1.setName(UUID.randomUUID().toString());
         task1.setDescription(UUID.randomUUID().toString());
         task1.setTaskState(taskState);
         taskRepository.save(task1);
 
-        TaskEntity task2 = new TaskEntity();
+        task2 = new TaskEntity();
         task2.setName(UUID.randomUUID().toString());
         task2.setDescription(UUID.randomUUID().toString());
         task2.setTaskState(taskState);
@@ -87,9 +87,11 @@ public class TaskServiceTest {
         comment3.setTask(task2);
         comment3.setText(UUID.randomUUID().toString());
         commentRepository.save(comment3);
-
+    }
+    @Test
+    void testDeleteTaskByName()
+    {
         taskService.deleteTaskByName(task1.getName());
-
         Assertions.assertTrue(taskRepository.findByName(task1.getName()).isEmpty());
         Assertions.assertTrue(commentRepository.findByTask(task1).isEmpty());
         Assertions.assertFalse(commentRepository.findByTask(task2).isEmpty());
