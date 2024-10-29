@@ -3,6 +3,7 @@ package ru.LevBayanov.TaskManagement.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.scheduling.config.Task;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "task_state")
-public class TaskState {
+public class TaskStateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +21,16 @@ public class TaskState {
     @Column(unique = true)
     private String name;
 
+    @Column(unique = true)
     private Long ordinal;
 
     private Instant createdAt = Instant.now();
 
-    @OneToMany
-    @JoinColumn(name = "task_state_id", referencedColumnName = "id")
-    private List<Task> tasks = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private ProjectEntity project;
+
+    @OneToMany(mappedBy = "taskState")
+    private List<TaskEntity> tasks;
+
 }

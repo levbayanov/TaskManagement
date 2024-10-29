@@ -12,17 +12,19 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "project")
-public class Project {
+public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique = true)
     private String name;
 
     private Instant cratedAt = Instant.now();
 
-    @OneToMany
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
-    private List<TaskState> taskStates = new ArrayList<>();
+    @ManyToMany(mappedBy = "project")
+    private List<UserEntity> users;
+
+    @OneToMany(mappedBy = "project")
+    private List<TaskStateEntity> taskStates;
+
 }
