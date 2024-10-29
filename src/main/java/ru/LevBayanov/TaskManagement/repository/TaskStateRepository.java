@@ -11,5 +11,6 @@ import java.util.List;
 
 public interface TaskStateRepository extends CrudRepository<TaskStateEntity, Long> {
     List<TaskStateEntity> findByProject(ProjectEntity project);
+    List<TaskStateEntity> findByName(String name);
     List<TaskStateEntity> findByTask(TaskEntity task);
 }
