@@ -31,6 +31,6 @@ public class TaskStateEntity {
     private ProjectEntity project;
 
     @OneToMany(mappedBy = "taskState")
-    private List<TaskEntity> tasks;
+    private List<TaskEntity> task = new ArrayList<>();
 
 }

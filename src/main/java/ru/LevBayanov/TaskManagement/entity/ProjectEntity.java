@@ -22,9 +22,9 @@ public class ProjectEntity {
     private Instant cratedAt = Instant.now();
 
     @ManyToMany(mappedBy = "project")
-    private List<UserEntity> users;
+    private List<UserEntity> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "project")
-    private List<TaskStateEntity> taskStates;
+    private List<TaskStateEntity> taskStates = new ArrayList<>();
 
 }

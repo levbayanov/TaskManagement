@@ -1,6 +1,7 @@
 package ru.LevBayanov.TaskManagement.entity;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -28,6 +29,6 @@ public class TaskEntity {
     private TaskStateEntity taskState;
 
     @OneToMany(mappedBy = "task")
-    private List<CommentEntity> comments;
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }

@@ -10,6 +10,5 @@ public interface ProjectRepository extends CrudRepository<ProjectEntity, Long> {
 
     List<ProjectEntity> findByName(String name);
 
-//    @Query("FROM ProjectEntity WHERE taskStates.name = :nameTaskState")
-//    List<ProjectEntity> findByNameTaskState(String nameTaskState);
+
 }

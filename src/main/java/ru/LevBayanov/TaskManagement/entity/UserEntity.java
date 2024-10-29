@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -23,9 +24,9 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
-    private List<ProjectEntity> project;
+    private List<ProjectEntity> project = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<CommentEntity> comments;
+    private List<CommentEntity> comments = new ArrayList<>();
 
 }
