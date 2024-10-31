@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement;
+package ru.LevBayanov.TaskManagement.custom;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

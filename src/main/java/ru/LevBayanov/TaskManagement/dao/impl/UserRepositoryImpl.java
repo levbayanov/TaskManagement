@@ -28,7 +28,6 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
         Root<UserEntity> userRoot = criteriaQuery.from(UserEntity.class);
 
-        // Условие where
         criteriaQuery.select(userRoot).where(criteriaBuilder.equal(userRoot.get("name"), name));
 
         return entityManager.createQuery(criteriaQuery).getResultList();
@@ -40,10 +39,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
         Root<UserEntity> userRoot = criteriaQuery.from(UserEntity.class);
 
-        // Join с таблицей user_project
         Join<UserEntity, ProjectEntity> projectJoin = userRoot.join("projects");
 
-        // Условие where
         criteriaQuery.select(userRoot).where(criteriaBuilder.equal(projectJoin, project));
 
         return entityManager.createQuery(criteriaQuery).getResultList();
