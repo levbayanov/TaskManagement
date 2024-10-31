@@ -1,6 +1,7 @@
 package ru.LevBayanov.TaskManagement;
 
 
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ public class TaskServiceTest {
     private final UserRepository userRepository;
     private final TaskStateRepository taskStateRepository;
     private final ProjectRepository projectRepository;
-    private final TaskServiceImpl taskService;
+    private TaskServiceImpl taskService;
 
     private TaskEntity task1;
     private TaskEntity task2;
@@ -88,13 +89,13 @@ public class TaskServiceTest {
         comment3.setText(UUID.randomUUID().toString());
         commentRepository.save(comment3);
     }
+
     @Test
     void testDeleteTaskByName()
     {
         taskService.deleteTaskByName(task1.getName());
-        Assertions.assertTrue(taskRepository.findByName(task1.getName()).isEmpty());
+        Assertions.assertTrue(taskRepository.findByName(task1.getName()).isEmpty());;
         Assertions.assertTrue(commentRepository.findByTask(task1).isEmpty());
         Assertions.assertFalse(commentRepository.findByTask(task2).isEmpty());
-
     }
 }

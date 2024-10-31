@@ -18,24 +18,15 @@ public class TaskServiceImpl implements TaskService{
 
     private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
-    private final TaskStateRepository taskStateRepository;
-    private final ProjectRepository projectRepository;
     private final PlatformTransactionManager transactionManager;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository,
                            CommentRepository commentRepository,
-                           UserRepository userRepository,
-                           TaskStateRepository taskStateRepository,
-                           ProjectRepository projectRepository,
                            PlatformTransactionManager transactionManager)
     {
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
-        this.taskStateRepository = taskStateRepository;
-        this.projectRepository = projectRepository;
         this.transactionManager = transactionManager;
     }
 
@@ -44,13 +35,13 @@ public class TaskServiceImpl implements TaskService{
         TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
         List<TaskEntity> tasks = taskRepository.findByName(taskName);
         try {
-            for (TaskEntity task : tasks) {
+            for(TaskEntity task: tasks)
+            {
                 List<CommentEntity> comments = commentRepository.findByTask(task);
-                for (CommentEntity comment : comments) {
-                    commentRepository.delete(comment);
-                }
-                taskRepository.delete(task);;
+                commentRepository.deleteAll(comments);
+                taskRepository.delete(task);
             }
+
             transactionManager.commit(status);
         }
         catch (DataAccessException e)
