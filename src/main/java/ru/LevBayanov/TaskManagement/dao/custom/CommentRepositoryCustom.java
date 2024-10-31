@@ -7,7 +7,6 @@ import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import java.util.List;
 
 public interface CommentRepositoryCustom {
-    List<CommentEntity> findByTask(TaskEntity task);
     List<CommentEntity> findByUser(UserEntity user);
 
 }

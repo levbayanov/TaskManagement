@@ -109,4 +109,23 @@ public class TaskServiceTest {
 
         Assertions.assertNotNull(taskRepository.findByName(name));
     }
+
+    @Test
+    void testUpdateTask()
+    {
+        TaskEntity task = new TaskEntity();
+        task.setName(UUID.randomUUID().toString());
+        task.setDescription(UUID.randomUUID().toString());
+        task.setTaskState(taskState1);
+        taskRepository.save(task);
+
+        String name = task.getName();
+        String newName = UUID.randomUUID().toString();
+        String newDescription = UUID.randomUUID().toString();
+        String taskState = task.getTaskState().getName();
+
+        taskService.updateTask(name, newName, newDescription, taskState);
+
+
+    }
 }

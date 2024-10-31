@@ -11,7 +11,6 @@ import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskStateEntity;
 import ru.LevBayanov.TaskManagement.repository.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,16 +18,22 @@ public class TaskServiceImpl implements TaskService{
 
     private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
+    private final TaskStateRepository taskStateRepository;
     private final PlatformTransactionManager transactionManager;
+    private final CommentService commentService;
 
     @Autowired
     public TaskServiceImpl(TaskRepository taskRepository,
                            CommentRepository commentRepository,
-                           PlatformTransactionManager transactionManager)
+                           TaskStateRepository taskStateRepository,
+                           PlatformTransactionManager transactionManager,
+                           CommentService commentService)
     {
         this.taskRepository = taskRepository;
         this.commentRepository = commentRepository;
+        this.taskStateRepository = taskStateRepository;
         this.transactionManager = transactionManager;
+        this.commentService = commentService;
     }
 
 
@@ -48,15 +53,18 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
+    public void addTask(TaskEntity task) {
+        taskRepository.save(task);
+    }
+
+    @Override
     public void deleteTaskByName(String name) {
         TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
         List<TaskEntity> tasks = taskRepository.findByName(name);
         try {
             for(TaskEntity task: tasks)
             {
-                List<CommentEntity> comments = commentRepository.findByTask(task);
-                commentRepository.deleteAll(comments);
-                taskRepository.delete(task);
+                commentService.deleteCommentToTask(task);
             }
 
             transactionManager.commit(status);
@@ -66,7 +74,22 @@ public class TaskServiceImpl implements TaskService{
             transactionManager.rollback(status);
             throw e;
         }
+    }
 
+    @Override
+    public void updateTask(String name, String newName, String newDescription, String newTaskState)
+    {
+        TaskEntity foundTask = taskRepository.findByName(name).getFirst();
+        List<CommentEntity> comments = commentRepository.findByTask(foundTask);
+        TaskStateEntity taskState = taskStateRepository.findByName(newTaskState).getFirst();
 
+        TaskEntity updateTask = new TaskEntity();
+        updateTask.setName(newName);
+        updateTask.setDescription(newDescription);
+        updateTask.setTaskState(taskState);
+
+        deleteTaskByName(foundTask.getName());
+
+        addTask(updateTask);
     }
 }

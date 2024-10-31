@@ -48,13 +48,26 @@ public class TaskController {
     }
 
     @PostMapping("addTask")
-    public void createTask(@RequestParam String nameTask,
+    public void addTask(@RequestParam String nameTask,
                                                  String description,
                                                  String nameTaskState)
     {
         TaskStateEntity taskState = taskStateRepository.findByName(nameTaskState).getFirst();
         taskService.addTask(nameTask, description, taskState);
 
+    }
+
+    @DeleteMapping("deleteTask")
+    public void deleteTask(@RequestParam String name)
+    {
+        taskService.deleteTaskByName(name);
+    }
+
+    @PutMapping("PutTask")
+    public void updateTask(@RequestParam String name, String newName,
+                           String newDescription, String newTaskState)
+    {
+        taskService.updateTask(name, newName, newDescription, newTaskState);
     }
 
 }

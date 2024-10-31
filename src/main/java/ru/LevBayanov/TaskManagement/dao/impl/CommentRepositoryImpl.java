@@ -20,17 +20,6 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public List<CommentEntity> findByTask(TaskEntity task) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<CommentEntity> criteriaQuery = criteriaBuilder.createQuery(CommentEntity.class);
-        Root<CommentEntity> commentRoot = criteriaQuery.from(CommentEntity.class);
-
-        criteriaQuery.select(commentRoot)
-                .where(criteriaBuilder.equal(commentRoot.get("task"), task));
-
-        return entityManager.createQuery(criteriaQuery).getResultList();
-    }
 
     @Override
     public List<CommentEntity> findByUser(UserEntity user) {

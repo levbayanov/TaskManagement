@@ -29,7 +29,7 @@ public class TaskEntity {
     @JoinColumn(name = "task_state_id", nullable = false)
     private TaskStateEntity taskState;
 
-    @OneToMany(mappedBy = "task")
-    private List<CommentEntity> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "task")
+//    private List<CommentEntity> comments = new ArrayList<>();
 
 }
