@@ -24,7 +24,7 @@ public class ProjectEntity {
     @ManyToMany(mappedBy = "project")
     private List<UserEntity> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project")
-    private List<TaskStateEntity> taskStates = new ArrayList<>();
+//    @OneToMany(mappedBy = "project")
+//    private List<TaskStateEntity> taskStates = new ArrayList<>();
 
 }

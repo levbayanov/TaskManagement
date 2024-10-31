@@ -26,11 +26,11 @@ public class TaskStateEntity {
 
     private Instant createdAt = Instant.now();
 
+//    @OneToMany(mappedBy = "taskState")
+//    private List<TaskEntity> task = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private ProjectEntity project;
-
-    @OneToMany(mappedBy = "taskState")
-    private List<TaskEntity> task = new ArrayList<>();
 
 }

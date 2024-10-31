@@ -1,8 +1,6 @@
 package ru.LevBayanov.TaskManagement;
 
 
-import jakarta.transaction.Transactional;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,10 @@ public class TaskServiceTest {
     private final UserRepository userRepository;
     private final TaskStateRepository taskStateRepository;
     private final ProjectRepository projectRepository;
-    private TaskServiceImpl taskService;
+    private final TaskServiceImpl taskService;
 
+
+    private TaskStateEntity taskState1;
     private TaskEntity task1;
     private TaskEntity task2;
 
@@ -54,21 +54,21 @@ public class TaskServiceTest {
         user.setEmail(UUID.randomUUID().toString());
         userRepository.save(user);
 
-        TaskStateEntity taskState = new TaskStateEntity();
-        taskState.setName(UUID.randomUUID().toString());
-        taskState.setProject(project);
-        taskStateRepository.save(taskState);
+        taskState1 = new TaskStateEntity();
+        taskState1.setName(UUID.randomUUID().toString());
+        taskState1.setProject(project);
+        taskStateRepository.save(taskState1);
 
         task1 = new TaskEntity();
         task1.setName(UUID.randomUUID().toString());
         task1.setDescription(UUID.randomUUID().toString());
-        task1.setTaskState(taskState);
+        task1.setTaskState(taskState1);
         taskRepository.save(task1);
 
         task2 = new TaskEntity();
         task2.setName(UUID.randomUUID().toString());
         task2.setDescription(UUID.randomUUID().toString());
-        task2.setTaskState(taskState);
+        task2.setTaskState(taskState1);
         taskRepository.save(task2);
 
         CommentEntity comment1 = new CommentEntity();
@@ -97,5 +97,16 @@ public class TaskServiceTest {
         Assertions.assertTrue(taskRepository.findByName(task1.getName()).isEmpty());;
         Assertions.assertTrue(commentRepository.findByTask(task1).isEmpty());
         Assertions.assertFalse(commentRepository.findByTask(task2).isEmpty());
+    }
+
+    @Test
+    void testAddTask()
+    {
+        String name = UUID.randomUUID().toString();
+        String description = "jfejwiotr";
+        TaskStateEntity taskState = taskStateRepository.findByName(taskState1.getName()).getFirst();
+        taskService.addTask(name, description, taskState);
+
+        Assertions.assertNotNull(taskRepository.findByName(name));
     }
 }
