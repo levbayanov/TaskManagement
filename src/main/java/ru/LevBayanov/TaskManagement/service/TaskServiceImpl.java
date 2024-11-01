@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.servis;
+package ru.LevBayanov.TaskManagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

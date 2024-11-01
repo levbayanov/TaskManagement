@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskStateEntity;
 import ru.LevBayanov.TaskManagement.repository.TaskStateRepository;
-import ru.LevBayanov.TaskManagement.servis.TaskServiceImpl;
+import ru.LevBayanov.TaskManagement.service.TaskServiceImpl;
 
 
 @RestController

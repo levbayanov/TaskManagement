@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.LevBayanov.TaskManagement.entity.*;
 import ru.LevBayanov.TaskManagement.repository.*;
-import ru.LevBayanov.TaskManagement.servis.TaskServiceImpl;
+import ru.LevBayanov.TaskManagement.service.TaskServiceImpl;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.servis;
+package ru.LevBayanov.TaskManagement.service;
 
 import ru.LevBayanov.TaskManagement.entity.CommentEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;

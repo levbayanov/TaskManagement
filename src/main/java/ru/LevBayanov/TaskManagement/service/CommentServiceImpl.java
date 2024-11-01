@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.servis;
+package ru.LevBayanov.TaskManagement.service;
 
 import org.springframework.stereotype.Service;
 import ru.LevBayanov.TaskManagement.entity.CommentEntity;

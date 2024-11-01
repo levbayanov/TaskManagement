@@ -19,7 +19,7 @@ public class TaskControllerView {
     private TaskRepository taskRepository;
     private ProjectRepository projectRepository;
 
-    @GetMapping("/")
+    @GetMapping("/task/list")
     public String taskListView(Model model) {
         // Получаем список всех задач из репозитория
         Iterable<TaskEntity> tasks = taskRepository.findAll();
