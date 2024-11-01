@@ -5,9 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.LevBayanov.TaskManagement.entity.RoleEntity;
 import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import ru.LevBayanov.TaskManagement.repository.UserRepository;
 
+import java.util.Map;
 import java.util.UUID;
 
 @SpringBootTest
@@ -30,6 +32,7 @@ public class UserRepositoryTest {
         user1.setPassword(UUID.randomUUID().toString());
         user1.setFirsName(UUID.randomUUID().toString());
         user1.setLastName(UUID.randomUUID().toString());
+        user1.setRole(RoleEntity.ADMIN);
         userRepository.save(user1);
     }
 

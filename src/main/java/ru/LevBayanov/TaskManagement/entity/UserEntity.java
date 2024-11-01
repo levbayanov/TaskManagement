@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -21,6 +22,12 @@ public class UserEntity {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    //@ElementCollection(targetClass = RoleEntity.class, fetch = FetchType.EAGER)
+    //@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RoleEntity role = RoleEntity.USER;
 
     @Column(nullable = false)
     private String password;
