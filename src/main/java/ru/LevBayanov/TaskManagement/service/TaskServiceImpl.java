@@ -10,11 +10,13 @@ import ru.LevBayanov.TaskManagement.entity.CommentEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskStateEntity;
 import ru.LevBayanov.TaskManagement.repository.*;
+import ru.LevBayanov.TaskManagement.service.Impl.CommentService;
+import ru.LevBayanov.TaskManagement.service.Impl.TaskService;
 
 import java.util.List;
 
 @Service
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;

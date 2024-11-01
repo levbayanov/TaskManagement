@@ -10,6 +10,7 @@ import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import ru.LevBayanov.TaskManagement.repository.UserRepository;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest
@@ -32,7 +33,7 @@ public class UserRepositoryTest {
         user1.setPassword(UUID.randomUUID().toString());
         user1.setFirsName(UUID.randomUUID().toString());
         user1.setLastName(UUID.randomUUID().toString());
-        user1.setRole(RoleEntity.ADMIN);
+        user1.setRoles(Set.of(RoleEntity.USER, RoleEntity.ADMIN));
         userRepository.save(user1);
     }
 

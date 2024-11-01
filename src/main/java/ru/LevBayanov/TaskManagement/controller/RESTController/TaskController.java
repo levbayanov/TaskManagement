@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.RESTcontroller;
+package ru.LevBayanov.TaskManagement.controller.RESTController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

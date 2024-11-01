@@ -9,6 +9,7 @@ import ru.LevBayanov.TaskManagement.entity.*;
 import ru.LevBayanov.TaskManagement.repository.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -54,6 +55,7 @@ public class TaskRepositoryTest {
         user1.setPassword(UUID.randomUUID().toString());
         user1.setFirsName(UUID.randomUUID().toString());
         user1.setLastName(UUID.randomUUID().toString());
+        user1.setRoles(Set.of(RoleEntity.USER));
         userRepository.save(user1);
 
         taskState = new TaskStateEntity();

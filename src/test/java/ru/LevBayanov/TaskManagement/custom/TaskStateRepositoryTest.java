@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.LevBayanov.TaskManagement.entity.*;
 import ru.LevBayanov.TaskManagement.repository.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest
@@ -50,6 +51,7 @@ public class TaskStateRepositoryTest {
         user1.setPassword(UUID.randomUUID().toString());
         user1.setFirsName(UUID.randomUUID().toString());
         user1.setLastName(UUID.randomUUID().toString());
+        user1.setRoles(Set.of(RoleEntity.USER));
         userRepository.save(user1);
 
         taskState1 = new TaskStateEntity();
