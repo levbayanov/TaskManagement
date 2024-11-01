@@ -45,8 +45,11 @@ public class TaskStateRepositoryTest {
         projectRepository.save(project);
 
         user1 = new UserEntity();
-        user1.setName(UUID.randomUUID().toString());
+        user1.setUserName(UUID.randomUUID().toString());
         user1.setEmail(UUID.randomUUID().toString());
+        user1.setPassword(UUID.randomUUID().toString());
+        user1.setFirsName(UUID.randomUUID().toString());
+        user1.setLastName(UUID.randomUUID().toString());
         userRepository.save(user1);
 
         taskState1 = new TaskStateEntity();

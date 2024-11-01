@@ -22,7 +22,7 @@ public class CommentRepositoryTest {
     private final ProjectRepository projectRepository;
     private final TaskStateRepository taskStateRepository;
     private TaskEntity task;
-    private UserEntity user;
+    private UserEntity user1;
     private TaskStateEntity taskState;
     private ProjectEntity project;
     private CommentEntity comment1;
@@ -48,10 +48,13 @@ public class CommentRepositoryTest {
         project.setName(UUID.randomUUID().toString());
         projectRepository.save(project);
 
-        user = new UserEntity();
-        user.setName(UUID.randomUUID().toString());
-        user.setEmail(UUID.randomUUID().toString());
-        userRepository.save(user);
+        user1 = new UserEntity();
+        user1.setUserName(UUID.randomUUID().toString());
+        user1.setEmail(UUID.randomUUID().toString());
+        user1.setPassword(UUID.randomUUID().toString());
+        user1.setFirsName(UUID.randomUUID().toString());
+        user1.setLastName(UUID.randomUUID().toString());
+        userRepository.save(user1);
 
         taskState = new TaskStateEntity();
         taskState.setName(UUID.randomUUID().toString());
@@ -65,13 +68,13 @@ public class CommentRepositoryTest {
         taskRepository.save(task);
 
         comment1 = new CommentEntity();
-        comment1.setUser(user);
+        comment1.setUser(user1);
         comment1.setTask(task);
         comment1.setText(UUID.randomUUID().toString());
         commentRepository.save(comment1);
 
         comment2 = new CommentEntity();
-        comment2.setUser(user);
+        comment2.setUser(user1);
         comment2.setTask(task);
         comment2.setText(UUID.randomUUID().toString());
         commentRepository.save(comment2);
@@ -88,7 +91,7 @@ public class CommentRepositoryTest {
 
     @Test
     void testFindByTaskAndUser() {
-        List<CommentEntity> foundComments = commentRepository.findByTaskAndUser(task, user);
+        List<CommentEntity> foundComments = commentRepository.findByTaskAndUser(task, user1);
         assertThat(foundComments).isNotEmpty();
         assertEquals(2, foundComments.size());
         assertThat(foundComments).anyMatch(comment -> comment.getText().equals(comment1.getText()));

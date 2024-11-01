@@ -50,7 +50,7 @@ public class TaskServiceTest {
         projectRepository.save(project);
 
         UserEntity user = new UserEntity();
-        user.setName(UUID.randomUUID().toString());
+        user.setUserName(UUID.randomUUID().toString());
         user.setEmail(UUID.randomUUID().toString());
         userRepository.save(user);
 
