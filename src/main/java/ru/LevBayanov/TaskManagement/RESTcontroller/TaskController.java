@@ -1,19 +1,12 @@
 package ru.LevBayanov.TaskManagement.RESTcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.LevBayanov.TaskManagement.entity.CommentEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskStateEntity;
-import ru.LevBayanov.TaskManagement.repository.CommentRepository;
-import ru.LevBayanov.TaskManagement.repository.TaskRepository;
 import ru.LevBayanov.TaskManagement.repository.TaskStateRepository;
-import ru.LevBayanov.TaskManagement.servis.TaskService;
 import ru.LevBayanov.TaskManagement.servis.TaskServiceImpl;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/task")
