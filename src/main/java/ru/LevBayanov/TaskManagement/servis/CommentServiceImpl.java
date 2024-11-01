@@ -28,7 +28,16 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void moveCommentToTask(TaskEntity task) {
+    public void moveCommentToTask(List<CommentEntity> comments, TaskEntity task)
+    {
+        for(CommentEntity comment: comments)
+        {
+            CommentEntity newComment = new CommentEntity();
+            newComment.setText(comment.getText());
+            newComment.setTask(comment.getTask());
+            newComment.setUser(comment.getUser());
+            commentRepository.save(comment);
+        }
 
     }
 }

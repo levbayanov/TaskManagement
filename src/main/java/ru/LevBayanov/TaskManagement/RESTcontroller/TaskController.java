@@ -19,27 +19,14 @@ import java.util.List;
 @RequestMapping("/task")
 public class TaskController {
 
-    private final TaskRepository taskRepository;
     private final TaskStateRepository taskStateRepository;
-    private final CommentRepository commentRepository;
     private final TaskServiceImpl taskService;
     @Autowired
-    public TaskController(TaskRepository taskRepository,
-                          TaskStateRepository taskStateRepository,
-                          CommentRepository commentRepository,
+    public TaskController(TaskStateRepository taskStateRepository,
                           TaskServiceImpl taskService) {
-        this.taskRepository = taskRepository;
         this.taskStateRepository = taskStateRepository;
-        this.commentRepository = commentRepository;
         this.taskService = taskService;
     }
-
-//    @GetMapping("/findByName")
-//    public ResponseEntity<TaskEntity> getTaskByName(@RequestBody String name) {
-//        List<TaskEntity> foundTask = taskRepository.findByName(name);
-//
-//        return ResponseEntity.ok(foundTask.getFirst());
-//    }
 
     @GetMapping("findByName")
     public TaskEntity findByName(@RequestParam String name)
@@ -48,9 +35,10 @@ public class TaskController {
     }
 
     @PostMapping("addTask")
-    public void addTask(@RequestParam String nameTask,
-                                                 String description,
-                                                 String nameTaskState)
+    public void addTask(@RequestParam
+                            String nameTask,
+                            String description,
+                            String nameTaskState)
     {
         TaskStateEntity taskState = taskStateRepository.findByName(nameTaskState).getFirst();
         taskService.addTask(nameTask, description, taskState);
@@ -64,10 +52,10 @@ public class TaskController {
     }
 
     @PutMapping("PutTask")
-    public void updateTask(@RequestParam String name, String newName,
+    public void updateTask(@RequestParam String oldName, String newName,
                            String newDescription, String newTaskState)
     {
-        taskService.updateTask(name, newName, newDescription, newTaskState);
+        taskService.updateTask(oldName, newName, newDescription, newTaskState);
     }
 
 }

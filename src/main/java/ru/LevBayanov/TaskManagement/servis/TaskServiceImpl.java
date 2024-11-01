@@ -79,6 +79,7 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public void updateTask(String name, String newName, String newDescription, String newTaskState)
     {
+
         TaskEntity foundTask = taskRepository.findByName(name).getFirst();
         List<CommentEntity> comments = commentRepository.findByTask(foundTask);
         TaskStateEntity taskState = taskStateRepository.findByName(newTaskState).getFirst();
@@ -87,9 +88,12 @@ public class TaskServiceImpl implements TaskService{
         updateTask.setName(newName);
         updateTask.setDescription(newDescription);
         updateTask.setTaskState(taskState);
+        addTask(updateTask);
+
+        //commentService.moveCommentToTask(comments, updateTask);
 
         deleteTaskByName(foundTask.getName());
 
-        addTask(updateTask);
+
     }
 }

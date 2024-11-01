@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список задач</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Список задач</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <!--<th>Data</th>-->
+            <th>TaskState</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Итерируемся по задачам и выводим их в таблице -->
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td th:text="${task.description}"></td>
+           <!-- <td th:data="&{task.createdAt}"></td> -->
+            <td th:text="${task.taskState.getName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
