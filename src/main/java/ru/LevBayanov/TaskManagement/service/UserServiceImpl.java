@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ru.LevBayanov.TaskManagement.entity.RoleEntity;
@@ -23,10 +24,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService
 {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,6 +41,8 @@ public class UserServiceImpl implements UserService, UserDetailsService
             Exception.create("user exist");
         }
         user.setRoles(Collections.singleton(RoleEntity.USER));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
