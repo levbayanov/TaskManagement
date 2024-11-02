@@ -3,9 +3,8 @@ package ru.LevBayanov.TaskManagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import ru.LevBayanov.TaskManagement.entity.RoleEntity;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import ru.LevBayanov.TaskManagement.repository.ProjectRepository;
@@ -13,7 +12,10 @@ import ru.LevBayanov.TaskManagement.repository.TaskRepository;
 import ru.LevBayanov.TaskManagement.service.Impl.UserService;
 import ru.LevBayanov.TaskManagement.service.UserServiceImpl;
 
+import java.util.Set;
+
 @Controller
+@RequestMapping()
 public class MainController {
 
     private final UserServiceImpl userService;
@@ -30,17 +32,17 @@ public class MainController {
     }
 
     @GetMapping("/registration")
-    public String getRegistration()
+    public String getRegistration(Model model)
     {
         return "registration";
     }
 
     @PostMapping("/registration")
-    @ResponseBody
-    public UserEntity registerUser(UserEntity user)
+    public String registerUser(UserEntity user)
     {
+        user.setRoles(Set.of(RoleEntity.USER));
         userService.addUser(user);
-        return user;
+        return "redirect:/login";
     }
 
     @GetMapping("/home")
@@ -49,7 +51,7 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("task/list")
+    @GetMapping("/task/list")
     public String taskListView(Model model) {
         // Получаем список всех задач из репозитория
         Iterable<TaskEntity> tasks = taskRepository.findAll();

@@ -67,6 +67,7 @@ public class TaskServiceImpl implements TaskService {
             for(TaskEntity task: tasks)
             {
                 commentService.deleteCommentToTask(task);
+                taskRepository.delete(task);
             }
 
             transactionManager.commit(status);
@@ -95,7 +96,5 @@ public class TaskServiceImpl implements TaskService {
         //commentService.moveCommentToTask(comments, updateTask);
 
         deleteTaskByName(foundTask.getName());
-
-
     }
 }

@@ -21,13 +21,13 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("findByName")
+    @GetMapping("/findByName")
     public TaskEntity findByName(@RequestParam String name)
     {
         return taskService.findByName(name);
     }
 
-    @PostMapping("addTask")
+    @PostMapping("/addTask")
     public void addTask(@RequestParam
                             String nameTask,
                             String description,
@@ -38,13 +38,13 @@ public class TaskController {
 
     }
 
-    @DeleteMapping("deleteTask")
+    @DeleteMapping("/deleteTask")
     public void deleteTask(@RequestParam String name)
     {
         taskService.deleteTaskByName(name);
     }
 
-    @PutMapping("PutTask")
+    @PutMapping("/PutTask")
     public void updateTask(@RequestParam String oldName, String newName,
                            String newDescription, String newTaskState)
     {

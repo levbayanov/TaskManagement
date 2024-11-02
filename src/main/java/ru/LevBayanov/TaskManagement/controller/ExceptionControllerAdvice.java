@@ -1,4 +1,4 @@
-package ru.LevBayanov.TaskManagement.controller.exceptionController;
+package ru.LevBayanov.TaskManagement.controller;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;

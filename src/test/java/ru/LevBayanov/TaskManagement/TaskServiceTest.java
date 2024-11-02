@@ -10,6 +10,7 @@ import ru.LevBayanov.TaskManagement.entity.*;
 import ru.LevBayanov.TaskManagement.repository.*;
 import ru.LevBayanov.TaskManagement.service.TaskServiceImpl;
 
+import java.util.Set;
 import java.util.UUID;
 
 @SpringBootTest
@@ -51,7 +52,11 @@ public class TaskServiceTest {
 
         UserEntity user = new UserEntity();
         user.setUserName(UUID.randomUUID().toString());
+        user.setFirsName(UUID.randomUUID().toString());
+        user.setLastName(UUID.randomUUID().toString());
         user.setEmail(UUID.randomUUID().toString());
+        user.setPassword(UUID.randomUUID().toString());
+        user.setRoles(Set.of(RoleEntity.USER));
         userRepository.save(user);
 
         taskState1 = new TaskStateEntity();
