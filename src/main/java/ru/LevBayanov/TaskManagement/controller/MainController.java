@@ -53,11 +53,8 @@ public class MainController {
 
     @GetMapping("/task/list")
     public String taskListView(Model model) {
-        // Получаем список всех задач из репозитория
         Iterable<TaskEntity> tasks = taskRepository.findAll();
-        // Добавляем задачи в модель
         model.addAttribute("tasks", tasks);
-        // Возвращаем имя шаблона для рендеринга
-        return "taskList"; // taskList.html
+        return "taskList";
     }
 }
