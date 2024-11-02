@@ -90,7 +90,7 @@ public class TaskServiceImpl implements TaskService{
         updateTask.setTaskState(taskState);
         addTask(updateTask);
 
-        //commentService.moveCommentToTask(comments, updateTask);
+        commentService.moveCommentToTask(comments, updateTask);
 
         deleteTaskByName(foundTask.getName());
 
