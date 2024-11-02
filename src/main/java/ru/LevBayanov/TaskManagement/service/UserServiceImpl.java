@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService, UserDetailsService
         {
             Exception.create("user exist");
         }
-        user.setRoles(Collections.singleton(RoleEntity.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
