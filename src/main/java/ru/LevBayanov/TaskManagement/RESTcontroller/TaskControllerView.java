@@ -11,7 +11,7 @@ import ru.LevBayanov.TaskManagement.repository.ProjectRepository;
 import ru.LevBayanov.TaskManagement.repository.TaskRepository;
 
 @Controller
-@RequestMapping("/html")
+@RequestMapping()
 public class TaskControllerView {
 
 
