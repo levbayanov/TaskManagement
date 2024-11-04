@@ -9,14 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ru.LevBayanov.TaskManagement.entity.RoleEntity;
+import ru.LevBayanov.TaskManagement.utility.Role;
 import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import ru.LevBayanov.TaskManagement.repository.UserRepository;
 import ru.LevBayanov.TaskManagement.service.Impl.UserService;
 import ru.LevBayanov.TaskManagement.exception.Exception;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,7 +54,7 @@ public class UserServiceImpl implements UserService, UserDetailsService
 
     }
 
-    private Collection<GrantedAuthority> mapRole(Set<RoleEntity> roles)
+    private Collection<GrantedAuthority> mapRole(Set<Role> roles)
     {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))

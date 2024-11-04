@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.LevBayanov.TaskManagement.entity.RoleEntity;
+import ru.LevBayanov.TaskManagement.utility.Role;
 import ru.LevBayanov.TaskManagement.entity.TaskEntity;
 import ru.LevBayanov.TaskManagement.entity.UserEntity;
 import ru.LevBayanov.TaskManagement.repository.ProjectRepository;
 import ru.LevBayanov.TaskManagement.repository.TaskRepository;
-import ru.LevBayanov.TaskManagement.service.Impl.UserService;
 import ru.LevBayanov.TaskManagement.service.UserServiceImpl;
 
 import java.util.Set;
@@ -40,7 +39,7 @@ public class MainController {
     @PostMapping("/registration")
     public String registerUser(UserEntity user)
     {
-        user.setRoles(Set.of(RoleEntity.USER));
+        user.setRoles(Set.of(Role.USER));
         userService.addUser(user);
         return "redirect:/login";
     }

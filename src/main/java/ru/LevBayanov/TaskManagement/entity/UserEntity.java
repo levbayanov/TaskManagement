@@ -3,10 +3,10 @@ package ru.LevBayanov.TaskManagement.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.LevBayanov.TaskManagement.utility.Role;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Setter
@@ -24,11 +24,11 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ElementCollection(targetClass = RoleEntity.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Set<RoleEntity> roles = Set.of(RoleEntity.USER);
+    private Set<Role> roles = Set.of(Role.USER);
 
     @Column(nullable = false)
     private String password;

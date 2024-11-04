@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.LevBayanov.TaskManagement.entity.*;
 import ru.LevBayanov.TaskManagement.repository.*;
+import ru.LevBayanov.TaskManagement.utility.Role;
 
 import java.util.List;
 import java.util.Set;
@@ -55,7 +56,7 @@ public class CommentRepositoryTest {
         user1.setPassword(UUID.randomUUID().toString());
         user1.setFirsName(UUID.randomUUID().toString());
         user1.setLastName(UUID.randomUUID().toString());
-        user1.setRoles(Set.of(RoleEntity.USER));
+        user1.setRoles(Set.of(Role.USER));
         userRepository.save(user1);
 
         taskState = new TaskStateEntity();
