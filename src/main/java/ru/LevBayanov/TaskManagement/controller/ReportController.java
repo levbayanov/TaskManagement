@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.LevBayanov.TaskManagement.entity.ReportEntity;
 import ru.LevBayanov.TaskManagement.service.ReportServiceImpl;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
 @Controller
 @RequestMapping("/report")
 public class ReportController {
@@ -23,12 +26,16 @@ public class ReportController {
         return "report";
     }
 
-    @GetMapping("/created")
+    @GetMapping("/create")
     public String createdReport(Model model)
     {
         Long id = reportService.createReport();
-        ReportEntity report = reportService.generateReport(id);
-
+        CompletableFuture<ReportEntity> future = reportService.generateReport(id);
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new IllegalStateException(e);
+        }
         return "redirect:/report/"+id;
     }
 

@@ -28,22 +28,8 @@ public class ReportServiceImpl
 
     public ReportEntity getReport(Long id)
     {
-        return reportRepository.findById(id).orElseThrow();
-    }
-
-    @Transactional
-    public void upReport(ReportEntity report)
-    {
-        ReportEntity newReport = new ReportEntity();
-        newReport.setStatus(report.getStatus());
-        newReport.setContent(report.getContent());
-        newReport.setCountUsers(report.getCountUsers());
-        newReport.setTimeToCountTask(report.getTimeToCountTask());
-        newReport.setTimeToCountUser(report.getTimeToCountUser());
-        newReport.setTimeToCreatedReport(report.getTimeToCreatedReport());
-
-        reportRepository.delete(report);
-        reportRepository.save(newReport);
+        return reportRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("Report not found, id =" + id)) ;
     }
 
     public Long createReport()
@@ -54,7 +40,7 @@ public class ReportServiceImpl
         return report.getId();
     }
 
-    public ReportEntity generateReport(Long id) {
+    public CompletableFuture<ReportEntity> generateReport(Long id) {
         CompletableFuture<ReportEntity> future = CompletableFuture.supplyAsync(() -> {
             long timeGenerateStart = System.currentTimeMillis();
             ReportEntity report = getReport(id);
@@ -90,11 +76,12 @@ public class ReportServiceImpl
                 report.setStatus(ReportStatus.ERROR);
                 throw new RuntimeException(e);
             } finally {
-                upReport(report);
+                //upReport(report);
+                reportRepository.save(report);
             }
             return report;
         });
-        return future.resultNow();
+        return future;
     }
 
 }
