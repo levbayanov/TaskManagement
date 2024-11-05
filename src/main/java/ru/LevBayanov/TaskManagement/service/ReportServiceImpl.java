@@ -53,8 +53,7 @@ public class ReportServiceImpl
         return report.getId();
     }
 
-    public void generateReport(Long id)
-    {
+    public void generateReport(Long id) {
         long timeGenerateStart = System.currentTimeMillis();
         ReportEntity report = getReport(id);
         List<TaskEntity> tasks = (List<TaskEntity>) taskRepository.findAll();
@@ -77,18 +76,20 @@ public class ReportServiceImpl
 
         });
 
-        t1.start();
         t2.start();
+        t1.start();
 
         try {
             t1.join();
             t2.join();
+            report.setTimeToCreatedReport(System.currentTimeMillis() - timeGenerateStart);
+            report.setStatus(ReportStatus.COMPLETED);
         } catch (InterruptedException e) {
+            report.setStatus(ReportStatus.ERROR);
             throw new RuntimeException(e);
+        } finally {
+            upReport(report);
         }
-
-        report.setTimeToCreatedReport(System.currentTimeMillis() - timeGenerateStart);
-        report.setStatus(ReportStatus.COMPLETED);
-        upReport(report);
     }
+
 }
