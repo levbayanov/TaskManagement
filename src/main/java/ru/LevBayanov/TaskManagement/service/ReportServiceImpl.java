@@ -55,20 +55,25 @@ public class ReportServiceImpl
 
     public void generateReport(Long id)
     {
+        long timeGenerateStart = System.currentTimeMillis();
         ReportEntity report = getReport(id);
         List<TaskEntity> tasks = (List<TaskEntity>) taskRepository.findAll();
 
 
         Thread t1 = new Thread(() -> {
+            long timeStart = System.currentTimeMillis();
             String content = tasks.stream().map(TaskEntity::getName).
                     collect(Collectors.joining("\n"));
             report.setContent(content);
+            report.setTimeToCountTask(System.currentTimeMillis() - timeStart);
         });
 
 
         Thread t2 = new Thread(() -> {
+            long timeStart = System.currentTimeMillis();
             Long countUser = userRepository.count();
             report.setCountUsers(countUser);
+            report.setTimeToCountUser(System.currentTimeMillis() - timeStart);
 
         });
 
@@ -82,9 +87,8 @@ public class ReportServiceImpl
             throw new RuntimeException(e);
         }
 
+        report.setTimeToCreatedReport(System.currentTimeMillis() - timeGenerateStart);
+        report.setStatus(ReportStatus.COMPLETED);
         upReport(report);
-
     }
-
-
 }

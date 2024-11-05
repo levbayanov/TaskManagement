@@ -24,7 +24,7 @@ public class ReportServiceTest
     @Test
     void testGenerateReport()
     {
-        reportService.generateReport(652L);
+        reportService.generateReport(1052L);
 
     }
 }
