@@ -14,12 +14,12 @@ import ru.LevBayanov.TaskManagement.service.ReportServiceImpl;
 public class ReportController {
 
     @Autowired
-    private ReportServiceImpl reportService; // ваш сервис для работы с отчетами
+    private ReportServiceImpl reportService;
 
     @GetMapping("/{id}")
     public String getReportContent(@PathVariable Long id, Model model) {
-        ReportEntity report = reportService.getReport(id); // Получаем отчет по ID
-        model.addAttribute("report", report); // Добавляем отчет в модель
+        ReportEntity report = reportService.getReport(id);
+        model.addAttribute("report", report);
         return "report";
     }
 
@@ -27,9 +27,9 @@ public class ReportController {
     public String createdReport(Model model)
     {
         Long id = reportService.createReport();
-        reportService.generateReport(id);
-        getReportContent(id, model);
-        return "redirect:/"+id;
+        ReportEntity report = reportService.generateReport(id);
+
+        return "redirect:/report/"+id;
     }
 
 }
