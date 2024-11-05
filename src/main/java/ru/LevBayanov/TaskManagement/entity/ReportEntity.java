@@ -25,7 +25,7 @@ public class ReportEntity
     @Column(nullable = false)
     private ReportStatus status = ReportStatus.CREATED;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     private String content;
 
 //    @ManyToMany

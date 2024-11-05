@@ -28,7 +28,7 @@ public class Config
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/registration", "/login", "/logout").permitAll()
-                        .requestMatchers("/task/**").hasRole("ADMIN")
+                        .requestMatchers("/task/**", "/report/**").hasRole("USER")
                         .requestMatchers(WHITE_LIST_URL).hasRole("ADMIN")
                 .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
