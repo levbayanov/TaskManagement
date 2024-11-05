@@ -6,7 +6,41 @@
   <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<h1>Содержимое отчета</h1>
+<h1>Отчет ID: <span th:text="${report.id}">0</span></h1>
+
+<h2>Содержимое отчета:</h2>
 <pre th:text="${report.content}"></pre>
+
+<h2>Статистика:</h2>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Название</th>
+    <th>Значение</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>Количество пользователей</td>
+    <td th:text="${report.countUsers}">0</td>
+  </tr>
+  <tr>
+    <td>Время подсчета пользователей (мс)</td>
+    <td th:text="${report.timeToCountUser}">0</td>
+  </tr>
+  <tr>
+    <td>Время подсчета задач (мс)</td>
+    <td th:text="${report.timeToCountTask}">0</td>
+  </tr>
+  <tr>
+    <td>Время создания отчета (мс)</td>
+    <td th:text="${report.timeToCreatedReport}">0</td>
+  </tr>
+  <tr>
+    <td>Статус отчета</td>
+    <td th:text="${report.status}">Статус будет здесь...</td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>
