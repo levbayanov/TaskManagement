@@ -31,8 +31,8 @@ public class TaskEntity {
     @JoinColumn(name = "task_state_id", nullable = false)
     private TaskStateEntity taskState;
 
-    @ManyToMany(mappedBy = "tasks")
-    private List<ReportEntity> reports = new ArrayList<>();
+//    @ManyToMany(mappedBy = "tasks")
+//    private List<ReportEntity> reports = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "task")
 //    private List<CommentEntity> comments = new ArrayList<>();

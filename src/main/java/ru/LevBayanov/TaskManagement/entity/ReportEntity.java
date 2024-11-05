@@ -28,13 +28,13 @@ public class ReportEntity
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @ManyToMany
-    @JoinTable(
-            name = "report_task",
-            joinColumns = @JoinColumn(name = "report_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id")
-    )
-    private List<TaskEntity> tasks = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "report_task",
+//            joinColumns = @JoinColumn(name = "report_id"),
+//            inverseJoinColumns = @JoinColumn(name = "task_id")
+//    )
+//    private List<TaskEntity> tasks = new ArrayList<>();
 
     private Long countUsers;
 
