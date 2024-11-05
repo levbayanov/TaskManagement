@@ -55,21 +55,32 @@ public class ReportServiceImpl
 
     public void generateReport(Long id)
     {
-
         ReportEntity report = getReport(id);
         List<TaskEntity> tasks = (List<TaskEntity>) taskRepository.findAll();
 
 
-        String content = tasks.stream().map(TaskEntity::getName).
-                collect(Collectors.joining("\n"));
-        report.setContent(content);
+        Thread t1 = new Thread(() -> {
+            String content = tasks.stream().map(TaskEntity::getName).
+                    collect(Collectors.joining("\n"));
+            report.setContent(content);
+        });
 
 
+        Thread t2 = new Thread(() -> {
+            Long countUser = userRepository.count();
+            report.setCountUsers(countUser);
 
-        Long countUser = userRepository.count();
-        report.setCountUsers(countUser);
+        });
 
+        t1.start();
+        t2.start();
 
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         upReport(report);
 
